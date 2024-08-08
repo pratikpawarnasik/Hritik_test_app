@@ -4,31 +4,58 @@ const axios = require("axios");
 const fs = require("fs");
 
 const server = jsonServer.create();
-const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
-
 const GITHUB_REPO_URL =
-  "https://github.com/pratikpawarnasik/mockData/blob/ac377e7c168ba50fc9b6a89b75a4c3494e91a2cd/db.json";
+  "https://raw.githubusercontent.com/pratikpawarnasik/mockData/main/db.json";
 
-// "https://raw.githubusercontent.com/<your-username>/<your-repo>/main/db.json";
+const fetchData = async () => {
+  try {
+    const response = await axios.get(GITHUB_REPO_URL);
+    console.log("Fetched data:", response.data);
 
-// Fetch the db.json file from GitHub
-axios
-  .get(GITHUB_REPO_URL)
-  .then((response) => {
-    fs.writeFileSync(
-      path.join(__dirname, "db.json"),
-      JSON.stringify(response.data)
-    );
-  })
-  .catch((error) => {
-    console.error("Error fetching db.json from GitHub:", error);
-  });
+    let data = response.data;
 
-server.use(middlewares);
-server.use(router);
+    // Handle stringified JSON
+    if (typeof data === "string") {
+      try {
+        data = JSON.parse(data);
+      } catch (error) {
+        console.error("Error parsing fetched string data:", error);
+        return false;
+      }
+    }
 
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`JSON Server is running on port ${PORT}`);
-});
+    // Ensure the data is an object
+    if (typeof data === "object" && !Array.isArray(data)) {
+      fs.writeFileSync(
+        path.join(__dirname, "db.json"),
+        JSON.stringify(data, null, 2)
+      );
+      return true;
+    } else {
+      console.error("Fetched data is not an object:", typeof data);
+      return false;
+    }
+  } catch (error) {
+    console.error("Error fetching or parsing db.json from GitHub:", error);
+    return false;
+  }
+};
+
+const startServer = async () => {
+  const dataFetched = await fetchData();
+  if (dataFetched) {
+    const router = jsonServer.router("db.json");
+    server.use(middlewares);
+    server.use(router);
+
+    const PORT = process.env.PORT || 3001;
+    server.listen(PORT, () => {
+      console.log(`JSON Server is running on port ${PORT}`);
+    });
+  } else {
+    console.error("Server not started due to data fetching error.");
+  }
+};
+
+startServer();
