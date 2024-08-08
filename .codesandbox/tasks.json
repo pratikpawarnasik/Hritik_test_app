@@ -28,6 +28,11 @@
     "eject": {
       "name": "eject",
       "command": "yarn eject"
+    },
+    "npm install -g json-server": {
+      "name": "npm install -g json-server",
+      "command": "npm install -g json-server",
+      "runAtStart": true
     }
   }
 }
