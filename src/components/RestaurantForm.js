@@ -2,13 +2,14 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import "./RestaurantForm.css"; // Import the CSS file for styling
 
 const RestaurantForm = ({ initialValues, onSubmit }) => {
   const validationSchema = Yup.object({
     name: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
     location: Yup.string().required("Required"),
-    // Add more fields as needed
+    cuisine: Yup.string().required("Required"), // Add validation for cuisine
   });
 
   return (
@@ -17,23 +18,46 @@ const RestaurantForm = ({ initialValues, onSubmit }) => {
       onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
-      <Form>
-        <div>
-          <label>Name</label>
-          <Field name="name" type="text" />
-          <ErrorMessage name="name" component="div" />
+      <Form className="restaurant-form">
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <Field name="name" type="text" className="form-control" />
+          <ErrorMessage name="name" component="div" className="error-message" />
         </div>
-        <div>
-          <label>Description</label>
-          <Field name="description" type="text" />
-          <ErrorMessage name="description" component="div" />
+
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <Field name="description" type="text" className="form-control" />
+          <ErrorMessage
+            name="description"
+            component="div"
+            className="error-message"
+          />
         </div>
-        <div>
-          <label>Location</label>
-          <Field name="location" type="text" />
-          <ErrorMessage name="location" component="div" />
+
+        <div className="form-group">
+          <label htmlFor="location">Location</label>
+          <Field name="location" type="text" className="form-control" />
+          <ErrorMessage
+            name="location"
+            component="div"
+            className="error-message"
+          />
         </div>
-        <button type="submit">Submit</button>
+
+        <div className="form-group">
+          <label htmlFor="cuisine">Cuisine</label>
+          <Field name="cuisine" type="text" className="form-control" />
+          <ErrorMessage
+            name="cuisine"
+            component="div"
+            className="error-message"
+          />
+        </div>
+
+        <button type="submit" className="submit-button">
+          Submit
+        </button>
       </Form>
     </Formik>
   );

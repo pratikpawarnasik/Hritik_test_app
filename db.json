@@ -1,16 +1,88 @@
 {
   "restaurants": [
     {
-      "id": 1,
-      "name": "Restaurant A",
-      "location": "Location A",
-      "cuisine": "Cuisine A"
+      "id": 2,
+      "name": "Savory Sanctuary",
+      "location": "Seaside Retreat",
+      "cuisine": "Fusion Feast",
+      "description": "An eclectic mix of flavors from around the world, set in a serene seaside location."
     },
     {
-      "id": 2,
-      "name": "Restaurant B",
-      "location": "Location B",
-      "cuisine": "Cuisine B"
+      "id": 3,
+      "name": "Epicurean Escape",
+      "location": "Uptown Plaza",
+      "cuisine": "Gourmet Delicacies",
+      "description": "A haven for food enthusiasts, featuring gourmet delicacies and an elegant atmosphere."
+    },
+    {
+      "id": 4,
+      "name": "Tastebud Tavern",
+      "location": "Historic Quarter",
+      "cuisine": "Classic Comfort",
+      "description": "A cozy spot in the historic quarter, serving up classic comfort food with a modern twist."
+    },
+    {
+      "id": 5,
+      "name": "Cuisine Corner",
+      "location": "Market Square",
+      "cuisine": "Artisanal Bites",
+      "description": "Located in the bustling Market Square, this eatery offers artisanal bites and fresh, local ingredients."
+    },
+    {
+      "id": 6,
+      "name": "The Gourmet Bistro",
+      "location": "Downtown Haven",
+      "cuisine": "International Delights",
+      "description": "A charming spot offering a diverse range of international dishes crafted to perfection."
+    },
+    {
+      "id": 7,
+      "name": "Savory Sanctuary",
+      "location": "Seaside Retreat",
+      "cuisine": "Fusion Feast",
+      "description": "An eclectic mix of flavors from around the world, set in a serene seaside location."
+    },
+    {
+      "id": 8,
+      "name": "Epicurean Escape",
+      "location": "Uptown Plaza",
+      "cuisine": "Gourmet Delicacies",
+      "description": "A haven for food enthusiasts, featuring gourmet delicacies and an elegant atmosphere."
+    },
+    {
+      "id": 9,
+      "name": "Tastebud Tavern",
+      "location": "Historic Quarter",
+      "cuisine": "Classic Comfort",
+      "description": "A cozy spot in the historic quarter, serving up classic comfort food with a modern twist."
+    },
+    {
+      "id": 10,
+      "name": "Cuisine Corner",
+      "location": "Market Square",
+      "cuisine": "Artisanal Bites",
+      "description": "Located in the bustling Market Square, this eatery offers artisanal bites and fresh, local ingredients."
+    },
+    {
+      "id": 11,
+      "name": "The Gourmet Bistro",
+      "location": "Downtown Haven",
+      "cuisine": "International Delights",
+      "description": "A charming spot offering a diverse range of international dishes crafted to perfection."
+    },
+    {
+      "id": 12,
+      "name": "Savory Sanctuary",
+      "location": "Seaside Retreat",
+      "cuisine": "Fusion Feast",
+      "description": "An eclectic mix of flavors from around the world, set in a serene seaside location."
+    },
+    {
+      "id": 13,
+      "name": "Epicurean Escape",
+      "location": "Uptown Plaza",
+      "cuisine": "Gourmet Delicacies",
+      "description": "A haven for food enthusiasts, featuring gourmet delicacies and an elegant atmosphere."
     }
   ]
 }

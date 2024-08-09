@@ -1,54 +1,80 @@
 // src/components/RestaurantList.js
 import React, { useEffect, useState } from "react";
 import { getRestaurants, deleteRestaurant } from "../api";
-import RestaurantItem from "./RestaurantItem";
 
 const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [restaurantsPerPage] = useState(5);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    try {
-      const data = await getRestaurants();
-      setRestaurants(data); // Set the data directly
-    } catch (error) {
-      setError(error);
-      console.error("Error fetching data:", error);
-    }
+    const response = await getRestaurants();
+    setRestaurants(response);
   };
 
   const handleDelete = async (id) => {
-    try {
-      await deleteRestaurant(id);
-      fetchData(); // Refresh the list
-    } catch (error) {
-      setError(error);
-      console.error("Error deleting restaurant:", error);
-    }
+    await deleteRestaurant(id);
+    fetchData(); // Refresh the list
   };
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  // Pagination logic
+  const indexOfLastRestaurant = currentPage * restaurantsPerPage;
+  const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantsPerPage;
+  const currentRestaurants = restaurants.slice(
+    indexOfFirstRestaurant,
+    indexOfLastRestaurant
+  );
+
+  const totalPages = Math.ceil(restaurants.length / restaurantsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div>
+    <div className="restaurant-list-container">
       <h3>Here is Restaurant List!</h3>
-      {restaurants.length > 0 ? (
-        restaurants.map((restaurant) => (
-          <RestaurantItem
-            key={restaurant.id}
-            restaurant={restaurant}
-            onDelete={handleDelete}
-          />
-        ))
-      ) : (
-        <p>No restaurants available.</p>
-      )}
+      {currentRestaurants.map((restaurant) => (
+        <div key={restaurant.id} className="restaurant-item">
+          <div className="restaurant-info">
+            <span>
+              <strong>Name:</strong> {restaurant.name}
+            </span>
+            <span>
+              <strong>Location:</strong> {restaurant.location}
+            </span>
+            <span>
+              <strong>Cuisine:</strong> {restaurant.cuisine}
+            </span>
+          </div>
+          <div className="restaurant-actions">
+            <button
+              onClick={() => alert("Edit functionality not implemented yet!")}
+            >
+              Edit
+            </button>
+            <button
+              className="delete"
+              onClick={() => handleDelete(restaurant.id)}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      ))}
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => paginate(index + 1)}
+            className={currentPage === index + 1 ? "active" : ""}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

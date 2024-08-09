@@ -8,13 +8,13 @@ import {
 import RestoHome from "./pages/RestoHome";
 import AddRestaurant from "./pages/AddRestaurant";
 import EditRestaurant from "./pages/EditRestaurant";
+import Header from "./components/Header";
 
 export default function App() {
   return (
     <div className="App">
-      {/* <h1>Hello CodeSandbox</h1> */}
-
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<RestoHome />} />
           <Route path="/add" element={<AddRestaurant />} />
